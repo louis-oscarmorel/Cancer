@@ -6,5 +6,5 @@ It was created as an assignement of the Data Camp course of the Master 2 Data Sc
 Cancer is one of the most documented disease. Large and deep databases exist and offer a wide variety of ...
 
 ## Get started
-The starting kit notebook can be found here. It provides detailed information on the project and explanations on the data.
+The starting kit notebook can be found [here](https://github.com/MathieuJuttet/Cancer/blob/main/Starting_kit.ipynb). It provides detailed information on the project and explanations on the data.
 
