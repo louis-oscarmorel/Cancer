@@ -1,0 +1,13 @@
+{
+	"filters":{
+		"op" : "=" ,
+		"content" : {
+		"field" : "case.primary_site" ,
+		"value" : [ "breast" ]
+		}
+	},
+	
+	"fields":"symbol",
+    "format":"tsv",
+	"size":50
+}

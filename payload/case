@@ -1,0 +1,14 @@
+{
+	"filters":{
+		"op" : "=" ,
+		"content" : {
+		"field" : "primary_site" ,
+		"value" : [ "breast" ]
+		}
+	},
+	
+	"format":"tsv",
+	"fields":"case_id,submitter_id",
+    "expand":"exposures",
+	"size":10000
+}
