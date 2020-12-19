@@ -9,6 +9,6 @@
 	
 	"format":"tsv",
 	"fields":"case_id,submitter_id",
-    "expand":"exposures",
+	"expand":"exposures,annotations,demographic,diagnoses,family_histories,samples,tissue_source_site",
 	"size":10000
 }
