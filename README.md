@@ -28,38 +28,51 @@ The complexity of tumor diagnosis requires the development of new solutions allo
 
 ## Molecular Biology ; Key concepts to understand the work that needs to be done
 
+**The aim of this project is to find profiles of patients with characteristics associated with a good or bad response to a specific treatment. Depending on the data we have, our goal will be to assign the right treatment for each patient, thus improving their chances of survival.**
+
+The biology of cancer is complex. In this challenge, we will focus on (i) clinical data, such as age, ethnicity etc ...; (ii) the anatomopathological characteristics, ie the grade of the lesion, its stage and its histological type and; (iii) molecular biology, respectively genomic alteration (DNA mutation) and genomic expression (RNAseq) data.
+
+
+The proposal for highly personalized treatments must take into account this very large amount of information. We will approach here very quickly the fundamental notions of biology so that the reader can understand the data and can work on the dataframe to reduce its dimensions and create relevant composite criteria for his prediction work.
+
+
+DNA, or deoxyribonucleic acid, is a series of four chemical units called nucleotides (A, T, C, G), the combination of which supports information from living things. In humans, this “hardware” support is located in the nuclei of cells and represents a combination of 3 billion nucleotides grouped together in 23 pairs of chromosomes. The majority of this DNA (70%) is said to be non-coding, ie it does not allow the production of protein. The remaining 30% is divided into 20k-30k pairs of genes. A gene is a portion of DNA that produces messenger RNA (mRNA).
+
+
+RNA is a sequence of nucleotides (A, U, C, G) which is copied from the DNA model by an enzyme (protein) during the process of "transcription". This mRNA leaves the nucleus of the cell to be then "translated" into protein by a ribosome (RNA/proteic complex). The ribosome matches each RNA nucleotide triplet with an amino acid. The sequence of these amino acids constitutes a protein. Proteins have chemical groups that allow them to influence their environment and are therefore one of the supports of life.
+
+
+Cancer is characterized by an accumulation of mutations in DNA, causing changes in the function of proteins and therefore in the behavior of cells, making them:
+- self-sufficient in growth signals;
+- Insensitive to growth inhibiting signals;
+- Capable of avoiding apoptosis (cell immortality);
+- Capable of replicating indefinitely (infinite growth)
+- Capable of inducing angiogenesis and forming metastases.
 
 
 
-
-## Get started
+# Getting started
 The starting kit notebook can be found [here](https://github.com/MathieuJuttet/Cancer/blob/main/Starting_kit.ipynb). It provides detailed information on the project and explanations on the data.
 
-Début topo projet : 
+## Data Loading and Processing
 
-Le but de ce projet est de trouver des profils de patients ayant des caractéristiques  associées à une bonne ou mauvaise réponse à un traitement spécifique. Ainsi, en fonction des données dont nous disposerons, notre but sera d’affecter le bon traitement correspondant pour chaque patient ainsi améliorant sa survie.
+Collecting large and complete data for tumor characterization is a complex task. We have chosen to base ourselves on the GDC Portal, which aggregates many databases specializing in cancer. The GDC Data Portal is a robust data-driven platform that allows cancer researchers and bioinformaticians to search and download cancer data for analysis.
 
-La biologie du cancer est complexe. Ainsi, nous avons beaucoup d’élements pour essayer de le caractériser précisément et proposer le meilleur traitement possible.
+The GDC Data Portal combines 67 projects focusing on 68 different cancers for a total of 84,392 patients. We were interested in patients with primary breast cancer (9,115 cases). Data retrieval for these 9115 patients was achieved by sending a JSON through the GDC API.
+(insert code).
 
-Historiquement, on se base sur des données cliniques :
-- Liste des données cliniques
 
-La médecine du Xxème siècle se base sur les données anatomopathologiques :
-Classification pTMN, Type histologique etc..
+### Clinical Data
 
-La médecine du XXI combine a celles-ci les données moléculaires de la tumeur pour gagner de la précision dans l’orientation thérapeutique.
+### Pathological Data
 
-ADN : ‘hardware’ du monde vivant se trouvant chez l’homme dans le noyau des cellules. Il est le même pour chaque cellules d’un individu (quasiment à quelques mutations près). C’est une suite d’unités appelées nucléotides (A,T,C,G). Un gène : une portion d’ADN qui produit un ARN. 
+### Molecular Biology Data
 
-L’ARN est une suite nucléotidique (A,U,C,G) qui est recopié sur le modèle de l’ADN par une enzyme (protéine) au cours du processus de la « transcription ». Cet ARN sort du noyau de la cellule pour être « traduit » en protéine par un ribosome. Le ribosome fait correspondre à chaque triplet de nucléotide de l’ARN un acide aminé. La suite des acides aminés constitue une protéine. Les protéines ont des groupements chimiques leur permettant d’avoir une influence sur leur environnement et sont donc l’un des support de la vie.
+In the era of post-genomic living (Lander, E. et al. Initial sequencing and analysis of the human genome. Nature (2001)), our ability to sequence DNA and integrate numerous biological data allows us to develop increasingly personalized approaches to understanding and treating cancer. In this challenge, in combination with "traditional" criteria for characterizing cancer (ie: clinical and pathological data), we will also be interested in genetic data.
 
-Le cancer est caractérisé par une accumulation de mutations au niveau de l’ADN, entrainant une modification de la fonction des protéines et donc du comportement des cellules, les rendant :
-- Immortelles
-- Proliférantes
-- Instables d’un point de vue génétique (vont faire de plus en plus de mutations).
-- etc...
+Nous allons nous interesser pour chaque patient aux 50 gènes les plus mutés dans cette population.
 
-On va s’intéresser pour chaque patient à 50 gènes connus comme étant impliqués dans les cancers d’une façon générale (gènes les plus mutés dans la population tumorale). Pour chaque gène et pour chaque patient, nous allons essayer d’obtenir 3 informations :
+connus comme étant impliqués dans les cancers d’une façon générale (gènes les plus mutés dans la population tumorale). Pour chaque gène et pour chaque patient, nous allons essayer d’obtenir 3 informations :
 
 - Statut mutationnel CNV : Gain/Loss/normal/Unknown
 	* Le gène peut avoir disparu ou avoir été dupliqué (augmentation du nombre de copies) au cours d’un incident de la machinerie cellulaire (pour plus d’info me demander ou regarder la page wikipédia ‘Replication de l’ADN’-→ anomalie). Ce type de mutation est différent d’une mutation SSM, car elle implique indirectement une augmentation ou diminution du nombre d’ARN produit et donc de protéine à la fin sans modification de la fonction de la protéine.
@@ -67,3 +80,10 @@ On va s’intéresser pour chaque patient à 50 gènes connus comme étant impli
 	* La mutation ponctuelle va modifier un ou quelques nucléotides dans la séquence d’ADN. L’ARN recopié sera ainsi modifié et le ribosome recopiant l’ARN ne fera pas le bon match d’acide aminé → la protéine sera modifée et donc sa fonction également.
 - Niveau d’expression du transcrit
 	* Le transcriptome est la quantité d’ARN produit pour chaque gène. Il y a plus d’ARN différents que de gènes car le processus « d’épissage de l’ARN » ajoute un degré de liberté permettant à un gène de coder pour plusieurs protéines différentes. Il est ainsi intéressant de regarder ce niveau d’expression génétique car il renseigne plus directement sur le nombre de protéines et leur types que l’analyse de l’ADN uniquement.
+
+
+## Exploratory Data Analysis
+
+Pour que le challenger puisse naviguer dans ces données, nous avons préalablement collecté et formater ces caractéristiques dans un dataframe de grande dimension (dim*dim). Pour plus d'informations sur l'obtention de ces données: voir la partie **Data loading**.
+
+
