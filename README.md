@@ -107,8 +107,60 @@ There are more different RNAs than genes because the process of "alternative RNA
 @Maxime: insert code and explanation.
 
 
-## Exploratory Data Analysis
+# Exploratory Data Analysis
 
 Pour que le challenger puisse naviguer dans ces données, nous avons préalablement collecté et formaté ces caractéristiques dans un dataframe de grande dimension (dim*dim). Pour plus d'informations sur l'obtention de ces données: voir la partie **Data loading**.
 
+## Clinical 
+
+Number of cases
+Disease Type (histology)
+  - number of each subtypes (can we split ductal and lobular ?)
+  - Age at Diagnosis for each subtype → statistical difference for each type ? (p-value)
+  - Survival for each disease type → statistical difference for each type ? (p-value)
+  - General treatment for each subtype ? (Treatment Type in GDC) → normally we just have 1098 cases for which we have pharmaceutical therapy/radiation therapy
+      Surgery ?
+      Radiotherapie?
+      Chemotherapy ?
+      Which drugs are used ?
+
+
+## Genomic Data :
+
+50 most mutated genes
+  General number of mutations for each histological subtypes
+  Are the three most mutated genes known for being involved with each cancer ? 
+  Is the presence of these mutations correlated with bad survival ?
+Let's be a little bit more precise : many types of mutations
+
+    SSM
+      Types of SSM → Explication Louis. pie chart by histo types ?
+      frequency of SSM (by histological type ?)
+      People with more than one SSM in the same gene → we’ll have to deal with that.
+      Other ?
+    CNV
+      Types of CNV → Explication Louis. Pie chart by histo types ?
+      frequency of CNV (by histological type ?)
+      Comparison SSM/CNV
+      
+Within the mutations : compare top 3 for CNV (in frequency) vs top 3 for SSM → is there a difference ? is it known ? (biblio check Louis)
+
+As we explained in the scientifical background → the impact of genetic mutations on cancer biology mostly depends on protein modification. Having information on the amount of RNA should give additional information (especially in the case of CNV -> is an increase in the number of copies associated with an increase in the number of transcripts?)
+
+## Transcriptomic Data
+
+for how many people did we get the transcriptomic data ?
+Correlation (Heatmap) for CNV gain/loss and increase/loss number of transcript for these genes. 
+→ focus on HER2 : (HER2 amplification is super important in breast cancer treatment → Target chimio if amplified)
+correlation for each histological subtype.
+Difference in terms of survival (how to plot that precisely ?
+
+
+# Submission
+
+Travail de prédiction :
+
+## Best objective : Prediction of the most effective treatment in patients with breast cancer
+## Side objective : Histological category prediction
+## Side objective : Survival prediction
 
