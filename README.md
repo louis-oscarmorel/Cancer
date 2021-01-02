@@ -61,6 +61,9 @@ Collecting large and complete data for tumor characterization is a complex task.
 The GDC Data Portal combines 67 projects focusing on 68 different cancers for a total of 84,392 patients. We were interested in patients with primary breast cancer (9,115 cases). Data retrieval for these 9115 patients was achieved by sending a JSON through the GDC API.
 (insert code).
 
+expliquer le travail qui a été fait sur la récuperation des données, son organisation, pourquoi on a viré certaines colonnes etc...
+(insert code)
+
 
 ### Clinical Data
 
@@ -74,16 +77,38 @@ Nous allons nous interesser pour chaque patient aux 50 gènes les plus mutés da
 
 connus comme étant impliqués dans les cancers d’une façon générale (gènes les plus mutés dans la population tumorale). Pour chaque gène et pour chaque patient, nous allons essayer d’obtenir 3 informations :
 
-- Statut mutationnel CNV : Gain/Loss/normal/Unknown
-	* Le gène peut avoir disparu ou avoir été dupliqué (augmentation du nombre de copies) au cours d’un incident de la machinerie cellulaire (pour plus d’info me demander ou regarder la page wikipédia ‘Replication de l’ADN’-→ anomalie). Ce type de mutation est différent d’une mutation SSM, car elle implique indirectement une augmentation ou diminution du nombre d’ARN produit et donc de protéine à la fin sans modification de la fonction de la protéine.
-- Statut mutationnel SSM : type de mutation ponctuelle
-	* La mutation ponctuelle va modifier un ou quelques nucléotides dans la séquence d’ADN. L’ARN recopié sera ainsi modifié et le ribosome recopiant l’ARN ne fera pas le bon match d’acide aminé → la protéine sera modifée et donc sa fonction également.
-- Niveau d’expression du transcrit
-	* Le transcriptome est la quantité d’ARN produit pour chaque gène. Il y a plus d’ARN différents que de gènes car le processus « d’épissage de l’ARN » ajoute un degré de liberté permettant à un gène de coder pour plusieurs protéines différentes. Il est ainsi intéressant de regarder ce niveau d’expression génétique car il renseigne plus directement sur le nombre de protéines et leur types que l’analyse de l’ADN uniquement.
+The molecular data that interests us here are of two kinds:
+- Genomic data: DNA mutations
+- Transcriptomic data: number of mRNA copies that each gene produces.
+
+## Genomic data:
+
+We will be interested in genetic mutations for the 50 most mutated genes in the population of patients with breast cancer.
+
+There are two main types of mutations:
+- "Copy Number Variation" (CNV) type mutations and "Single somatic Mutation" (SSM) type mutations.
+
+CNVs are a variation in the copy number of a given gene. Indeed, a gene is a sequence of several thousand nucleotide base pairs. A CNV gain causes an increase in the number of copies of this gene, thus being able to produce more RNA transcripts and therefore potentially more proteins leading to a modification of the biology of the cell. A CNV loss will lead to a disappearance of the gene leading to a loss of the protein and therefore of its biological functionality.
+
+SSMs are so-called ponctual mutations. The ponctual mutation will change one or a few nucleotides in the DNA sequence. This will change the copied RNA and the RNA-copying ribosome will not make the correct amino acid match. Thus, the protein will be modified and therefore its functionality as well.
+
+## Transcriptomic data:
+
+It is extremely relevant to add the so-called “transcriptomic” data to these genomic data. They correspond to the level of expression of the gene. The transcriptome represents the amount of mRNA produced for each gene. It is therefore interesting to look at this level of gene expression because it provides more direct information on the number of proteins and their types than analysis of DNA alone.
+
+## Limitation of this challenge:
+
+The data has been simplified for easier analysis. There are many different types of genomic mutations, involving different biological changes. To simplify this aspect, we produced a relatively arbitrary intermediate score to quantify the importance of the mutations for each gene.
+
+@Maxime: insert code with score and explanation of the choice of scoring.
+
+There are more different RNAs than genes because the process of "alternative RNA splicing" adds a degree of freedom for a gene to encode several different proteins. We have considered here all the mRNAs of a gene as coming from a single transcript.
+
+@Maxime: insert code and explanation.
 
 
 ## Exploratory Data Analysis
 
-Pour que le challenger puisse naviguer dans ces données, nous avons préalablement collecté et formater ces caractéristiques dans un dataframe de grande dimension (dim*dim). Pour plus d'informations sur l'obtention de ces données: voir la partie **Data loading**.
+Pour que le challenger puisse naviguer dans ces données, nous avons préalablement collecté et formaté ces caractéristiques dans un dataframe de grande dimension (dim*dim). Pour plus d'informations sur l'obtention de ces données: voir la partie **Data loading**.
 
 
